@@ -18,33 +18,33 @@ import axios from "axios";
 import { CRUDKUB } from "../Api/CRUD";
 import Swal from "sweetalert2";
 
-export default function UserList() {
-  const [users, setUsers] = useState([]);
+export default function Orders() {
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     UsersGetALL();
   }, []);
 
-  const UsersGet = () => {
-    fetch("http://rhome19.thddns.net:5526/api/customers/")
-      .then((res) => res.json())
-      .then((result) => {
-        setUsers(result);
-        console.log(users.l);
-      });
-  };
+  //   const UsersGet = () => {
+  //     fetch("http://rhome19.thddns.net:5526/api/materials/")
+  //       .then((res) => res.json())
+  //       .then((result) => {
+  //         setFactories(result);
+  //         console.log(materials);
+  //       });
+  //   };
 
   const UsersGetALL = async () => {
-    var data = await CRUDKUB("customers", "get", "", "");
-    // console.log(data);
-    setUsers(data);
+    var a = await CRUDKUB("order", "get", "", "");
+    console.log(a);
+    setOrders(a);
   };
   // const UsersGetSig = (id) => {
   //   CRUDKUB("customers", "get", "", id);
   // };
 
   const UpdateUser = (id) => {
-    window.location = "/user/update/" + id;
+    window.location = "/orders/update/" + id;
   };
 
   const UserDelete = (id) => {
@@ -59,10 +59,10 @@ export default function UserList() {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://rhome19.thddns.net:5526/api/customers/delete/${id}`)
+          .delete(`http://rhome19.thddns.net:5526/api/order/delete/${id}`)
           .then((res) => {
             // console.log(res);
-            window.location = "/user";
+            window.location = "/orders";
           });
         // Swal.fire("Deleted!", "Your file has been deleted.", "success");
       }
@@ -102,12 +102,12 @@ export default function UserList() {
                 color="primary"
                 gutterBottom
               >
-                Customers
+                Orders
               </Typography>
             </Box>
             <Box style={{ marginLeft: "180" }}>
               <Link
-                to="/user/create"
+                to="/orders/create"
                 style={{ textDecoration: "none", padding: "40px" }}
               >
                 <Button
@@ -128,43 +128,40 @@ export default function UserList() {
                     ID
                   </TableCell>
                   <TableCell style={{ fontSize: "20px" }} align="right">
-                    Name
+                    Customers id
                   </TableCell>
                   <TableCell style={{ fontSize: "20px" }} align="right">
-                    Address
+                    Order Ditials Name
                   </TableCell>
                   <TableCell style={{ fontSize: "20px" }} align="right">
-                    Contect
+                    Price
                   </TableCell>
-                  <TableCell style={{ fontSize: "20px" }} align="right">
-                    E-mail
-                  </TableCell>
-                  <TableCell style={{ fontSize: "20px" }} align="right">
-                    Line
-                  </TableCell>
-                  <TableCell style={{ fontSize: "20px" }} align="right">
+                  <TableCell style={{ fontSize: "20px" }} align="center">
                     Action
                   </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {users.map((user) => (
-                  <TableRow key={user.ID}>
-                    <TableCell align="right">{user.id}</TableCell>
-                    <TableCell align="right">{user.name}</TableCell>
-                    <TableCell align="right">{user.address}</TableCell>
-                    <TableCell align="right">{user.contact}</TableCell>
-                    <TableCell align="right">{user.email}</TableCell>
-                    <TableCell align="right">{user.line}</TableCell>
+                {orders.map((orders) => (
+                  <TableRow key={orders.ID}>
+                    <TableCell align="right">{orders.id}</TableCell>
+                    <TableCell align="right">{orders.customer.name}</TableCell>
+                    <TableCell align="right">
+                      {orders.order_detail.name}
+                    </TableCell>
+                    <TableCell align="right">
+                      {orders.order_detail.price}
+                    </TableCell>
+
                     <TableCell align="center">
                       <ButtonGroup
                         color="primary"
                         aria-label="outlined primary button group"
                       >
-                        <Button onClick={() => UpdateUser(user.id)}>
+                        <Button onClick={() => UpdateUser(orders.id)}>
                           Edit
                         </Button>
-                        <Button onClick={() => UserDelete(user.id)}>
+                        <Button onClick={() => UserDelete(orders.id)}>
                           Delete
                         </Button>
                       </ButtonGroup>

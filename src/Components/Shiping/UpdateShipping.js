@@ -10,29 +10,23 @@ export default function UserUpdate() {
 
   useEffect(() => {
     axios
-      .get(`http://rhome19.thddns.net:5526/api/customers/${id}`)
+      .get(`http://rhome19.thddns.net:5526/api/shipping/${id}`)
       .then((res) => {
-        // console.log(res.data);
-        setName(res.data.name);
-        setPassword(res.data.password);
-        setAddress(res.data.address);
-        setContact(res.data.contact);
-        setLine(res.data.line);
-        setEmail(res.data.email);
-        setFavorite(res.data.favorite);
+        console.log(res.data);
+        setTransport(res.data.transport);
+        setArrived(res.data.arrived);
+        setOrder_id(res.data.order_id);
+        setHr_id(res.data.hrId);
       });
   }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     let data = {
-      name: name,
-      password: password,
-      address: address,
-      contact: contact,
-      line: line,
-      email: email,
-      favorite: favorite,
+      transport: transport,
+      arrived: arrived,
+      order_id: order_id,
+      hrId: hr_id,
     };
     // CRUDKUB("customers", "update", data, id);
     Swal.fire({
@@ -46,7 +40,7 @@ export default function UserUpdate() {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .put(`http://rhome19.thddns.net:5526/api/customers/edit/${id}`, data)
+          .put(`http://rhome19.thddns.net:5526/api/shipping/edit/${id}`, data)
           .then((res) => {
             Swal.fire("Update!", "Your file has been Updated.", "success");
 
@@ -70,13 +64,10 @@ export default function UserUpdate() {
     //   });
   };
 
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [address, setAddress] = useState("");
-  const [contact, setContact] = useState("");
-  const [line, setLine] = useState("");
-  const [email, setEmail] = useState("");
-  const [favorite, setFavorite] = useState("");
+  const [transport, setTransport] = useState("");
+  const [arrived, setArrived] = useState("");
+  const [order_id, setOrder_id] = useState("");
+  const [hr_id, setHr_id] = useState("");
 
   return (
     <Container maxWidth="xs" style={{ marginTop: "40px" }}>
@@ -89,7 +80,7 @@ export default function UserUpdate() {
         }}
       >
         <Typography component="h1" variant="h5" style={{ fontSize: "32px" }}>
-          Customers
+          Shiping
         </Typography>
         <form
           style={{
@@ -99,30 +90,33 @@ export default function UserUpdate() {
           onSubmit={handleSubmit}
         >
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
-                autoComplete="name"
-                name="name"
                 variant="outlined"
                 required
                 fullWidth
-                id="name"
-                value={name}
-                label="You Name"
-                onChange={(e) => setName(e.target.value)}
+                type="date"
+                id="Transport"
+                label="Transport"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                value={transport}
+                onChange={(e) => setTransport(e.target.value)}
                 autoFocus
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
-                variant="outlined"
-                required
+                id="Arrived"
+                label="Arrived"
+                type="date"
                 fullWidth
-                id="password"
-                label="Password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                value={arrived}
+                onChange={(e) => setArrived(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -130,10 +124,10 @@ export default function UserUpdate() {
                 variant="outlined"
                 required
                 fullWidth
-                id="address"
-                label="address"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
+                id="order_id"
+                label="Order Id"
+                value={order_id}
+                onChange={(e) => setOrder_id(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -141,43 +135,10 @@ export default function UserUpdate() {
                 variant="outlined"
                 required
                 fullWidth
-                id="contact"
-                label="Contact"
-                value={contact}
-                onChange={(e) => setContact(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="line"
-                label="Line"
-                value={line}
-                onChange={(e) => setLine(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="Favorite"
-                label="Favorite"
-                value={favorite}
-                onChange={(e) => setFavorite(e.target.value)}
+                id="hr_id"
+                label="Hr ID"
+                value={hr_id}
+                onChange={(e) => setHr_id(e.target.value)}
               />
             </Grid>
           </Grid>

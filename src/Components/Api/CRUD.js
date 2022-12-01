@@ -17,7 +17,7 @@ export function CRUDKUB(name, method, data, id) {
       apiurl = `http://rhome19.thddns.net:5526/api/${name}/`;
       met = "get";
     // case "update":
-    //   apiurl = `http://rhome19.thddns.net:5526/api/${name}/${id}`;
+    //   apiurl = `http://rhome19.thddns.net:5526/api/${name}/edit/${id}`;
     //   met = "put";
     default:
       break;
@@ -35,8 +35,8 @@ export function CRUDKUB(name, method, data, id) {
         position: "mid",
         icon: "success",
         title: response.statusText,
+        text: "You action is success",
         showConfirmButton: true,
-        timer: 1500,
       });
       window.history.back();
     }

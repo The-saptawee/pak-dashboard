@@ -93,6 +93,23 @@ export default function PersistentDrawerLeft() {
               Project - Pak
             </Typography>
           </Link>
+
+          <Link
+            to="/logout"
+            style={{
+              textDecoration: "none",
+              color: "white",
+            }}
+          >
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              style={{ marginLeft: "1400px" }}
+            >
+              Logout
+            </Typography>
+          </Link>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -118,7 +135,7 @@ export default function PersistentDrawerLeft() {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <Link
+        {/* <Link
           to="/"
           style={{
             textDecoration: "none",
@@ -129,21 +146,7 @@ export default function PersistentDrawerLeft() {
           <List>
             <ListItem>Home</ListItem>
           </List>
-        </Link>
-
-        <Link
-          to="/user"
-          style={{
-            textDecoration: "none",
-            margin: "10px",
-            color: "Black",
-          }}
-        >
-          <List>
-            <ListItem>Customers</ListItem>
-          </List>
-        </Link>
-
+        </Link> */}
         <Link
           to="/hrs"
           style={{
@@ -156,9 +159,8 @@ export default function PersistentDrawerLeft() {
             <ListItem>Hrs</ListItem>
           </List>
         </Link>
-
         <Link
-          to="/Orders"
+          to="/user"
           style={{
             textDecoration: "none",
             margin: "10px",
@@ -166,12 +168,11 @@ export default function PersistentDrawerLeft() {
           }}
         >
           <List>
-            <ListItem>Orders</ListItem>
+            <ListItem>Customers</ListItem>
           </List>
         </Link>
-
         <Link
-          to="/Factories"
+          to="/vonder"
           style={{
             textDecoration: "none",
             margin: "10px",
@@ -179,12 +180,11 @@ export default function PersistentDrawerLeft() {
           }}
         >
           <List>
-            <ListItem>Factories</ListItem>
+            <ListItem>Vonder</ListItem>
           </List>
         </Link>
-
         <Link
-          to="/Material"
+          to="/material"
           style={{
             textDecoration: "none",
             margin: "10px",
@@ -195,9 +195,45 @@ export default function PersistentDrawerLeft() {
             <ListItem>Material</ListItem>
           </List>
         </Link>
-
-        <Divider />
+        <Link
+          to="/orders"
+          style={{
+            textDecoration: "none",
+            margin: "10px",
+            color: "Black",
+          }}
+        >
+          <List>
+            <ListItem>Order</ListItem>
+          </List>
+        </Link>
+        <Link
+          to="/factories"
+          style={{
+            textDecoration: "none",
+            margin: "10px",
+            color: "Black",
+          }}
+        >
+          <List>
+            <ListItem>Factories</ListItem>
+          </List>
+        </Link>
+        <Link
+          to="/shipping"
+          style={{
+            textDecoration: "none",
+            margin: "10px",
+            color: "Black",
+          }}
+        >
+          <List>
+            <ListItem>Shiping</ListItem>
+          </List>
+        </Link>
+        <Divider />{" "}
       </Drawer>
+
       <Main open={open}>
         <DrawerHeader />
       </Main>

@@ -19,7 +19,7 @@ import { CRUDKUB } from "../Api/CRUD";
 import Swal from "sweetalert2";
 
 export default function UserList() {
-  const [users, setUsers] = useState([]);
+  const [shipping, setShipping] = useState([]);
 
   useEffect(() => {
     UsersGetALL();
@@ -29,22 +29,22 @@ export default function UserList() {
     fetch("http://rhome19.thddns.net:5526/api/customers/")
       .then((res) => res.json())
       .then((result) => {
-        setUsers(result);
-        console.log(users.l);
+        setShipping(result);
+        console.log(shipping);
       });
   };
 
   const UsersGetALL = async () => {
-    var data = await CRUDKUB("customers", "get", "", "");
-    // console.log(data);
-    setUsers(data);
+    var a = await CRUDKUB("shipping", "get", "", "");
+    // console.log(a);
+    setShipping(a);
   };
   // const UsersGetSig = (id) => {
   //   CRUDKUB("customers", "get", "", id);
   // };
 
   const UpdateUser = (id) => {
-    window.location = "/user/update/" + id;
+    window.location = "/shipping/update/" + id;
   };
 
   const UserDelete = (id) => {
@@ -59,10 +59,10 @@ export default function UserList() {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://rhome19.thddns.net:5526/api/customers/delete/${id}`)
+          .delete(`http://rhome19.thddns.net:5526/api/shipping/delete/${id}`)
           .then((res) => {
-            // console.log(res);
-            window.location = "/user";
+            console.log(res);
+            window.location = "/shipping";
           });
         // Swal.fire("Deleted!", "Your file has been deleted.", "success");
       }
@@ -102,12 +102,12 @@ export default function UserList() {
                 color="primary"
                 gutterBottom
               >
-                Customers
+                Shiping
               </Typography>
             </Box>
             <Box style={{ marginLeft: "180" }}>
               <Link
-                to="/user/create"
+                to="/shipping/create"
                 style={{ textDecoration: "none", padding: "40px" }}
               >
                 <Button
@@ -128,19 +128,16 @@ export default function UserList() {
                     ID
                   </TableCell>
                   <TableCell style={{ fontSize: "20px" }} align="right">
-                    Name
+                    Transport
                   </TableCell>
                   <TableCell style={{ fontSize: "20px" }} align="right">
-                    Address
+                    Arrived
                   </TableCell>
                   <TableCell style={{ fontSize: "20px" }} align="right">
-                    Contect
+                    Order - id
                   </TableCell>
                   <TableCell style={{ fontSize: "20px" }} align="right">
-                    E-mail
-                  </TableCell>
-                  <TableCell style={{ fontSize: "20px" }} align="right">
-                    Line
+                    Hr - Name
                   </TableCell>
                   <TableCell style={{ fontSize: "20px" }} align="right">
                     Action
@@ -148,23 +145,22 @@ export default function UserList() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {users.map((user) => (
-                  <TableRow key={user.ID}>
-                    <TableCell align="right">{user.id}</TableCell>
-                    <TableCell align="right">{user.name}</TableCell>
-                    <TableCell align="right">{user.address}</TableCell>
-                    <TableCell align="right">{user.contact}</TableCell>
-                    <TableCell align="right">{user.email}</TableCell>
-                    <TableCell align="right">{user.line}</TableCell>
-                    <TableCell align="center">
+                {shipping.map((shipping) => (
+                  <TableRow key={shipping.ID}>
+                    <TableCell align="right">{shipping.id}</TableCell>
+                    <TableCell align="right">{shipping.transport}</TableCell>
+                    <TableCell align="right">{shipping.arrived}</TableCell>
+                    <TableCell align="right">{shipping.order_id}</TableCell>
+                    <TableCell align="right">{shipping.hr.name}</TableCell>
+                    <TableCell align="right">
                       <ButtonGroup
                         color="primary"
                         aria-label="outlined primary button group"
                       >
-                        <Button onClick={() => UpdateUser(user.id)}>
+                        <Button onClick={() => UpdateUser(shipping.id)}>
                           Edit
                         </Button>
-                        <Button onClick={() => UserDelete(user.id)}>
+                        <Button onClick={() => UserDelete(shipping.id)}>
                           Delete
                         </Button>
                       </ButtonGroup>

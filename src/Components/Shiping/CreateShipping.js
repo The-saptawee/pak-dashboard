@@ -6,16 +6,13 @@ export default function UserCreate() {
   const handleSubmit = (event) => {
     event.preventDefault();
     let data = {
-      name: name,
-      password: password,
-      address: address,
-      contact: contact,
-      line: line,
-      email: email,
-      favorite: favorite,
+      transport: transport,
+      arrived: arrived,
+      order_id: order_id,
+      hrId: hr_id,
     };
 
-    CRUDKUB("customers", "create", data);
+    CRUDKUB("shipping", "create", data);
     // fetch(`http://rhome19.thddns.net:5526/api/customers/create`, {
     //   method: "POST",
     //   headers: {
@@ -33,13 +30,10 @@ export default function UserCreate() {
     //   });
   };
 
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [address, setAddress] = useState("");
-  const [contact, setContact] = useState("");
-  const [line, setLine] = useState("");
-  const [email, setEmail] = useState("");
-  const [favorite, setFavorite] = useState("");
+  const [transport, setTransport] = useState("");
+  const [arrived, setArrived] = useState("");
+  const [order_id, setOrder_id] = useState("");
+  const [hr_id, setHr_id] = useState("");
 
   return (
     <Container maxWidth="xs" style={{ marginTop: "40px" }}>
@@ -51,7 +45,7 @@ export default function UserCreate() {
         }}
       >
         <Typography component="h1" variant="h5" style={{ fontSize: "32px" }}>
-          User
+          Shiping
         </Typography>
         <form
           style={{
@@ -61,28 +55,31 @@ export default function UserCreate() {
           onSubmit={handleSubmit}
         >
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
-                autoComplete="name"
-                name="name"
                 variant="outlined"
                 required
                 fullWidth
-                id="name"
-                label="You Name"
-                onChange={(e) => setName(e.target.value)}
+                type="date"
+                id="Transport"
+                label="Transport"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onChange={(e) => setTransport(e.target.value)}
                 autoFocus
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
-                type="password"
-                variant="outlined"
-                required
+                id="Arrived"
+                label="Arrived"
+                type="date"
                 fullWidth
-                id="password"
-                label="Password"
-                onChange={(e) => setPassword(e.target.value)}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onChange={(e) => setArrived(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -90,9 +87,9 @@ export default function UserCreate() {
                 variant="outlined"
                 required
                 fullWidth
-                id="adress"
-                label="Adress"
-                onChange={(e) => setAddress(e.target.value)}
+                id="order_id"
+                label="Order Id"
+                onChange={(e) => setOrder_id(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -100,39 +97,9 @@ export default function UserCreate() {
                 variant="outlined"
                 required
                 fullWidth
-                id="contact"
-                label="Contact"
-                onChange={(e) => setContact(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="line"
-                label="Line"
-                onChange={(e) => setLine(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="Favorite"
-                label="Favorite"
-                onChange={(e) => setFavorite(e.target.value)}
+                id="hr_id"
+                label="Hr ID"
+                onChange={(e) => setHr_id(e.target.value)}
               />
             </Grid>
           </Grid>

@@ -18,33 +18,33 @@ import axios from "axios";
 import { CRUDKUB } from "../Api/CRUD";
 import Swal from "sweetalert2";
 
-export default function UserList() {
-  const [users, setUsers] = useState([]);
+export default function Factories() {
+  const [factories, setFactories] = useState([]);
 
   useEffect(() => {
     UsersGetALL();
   }, []);
 
-  const UsersGet = () => {
-    fetch("http://rhome19.thddns.net:5526/api/customers/")
-      .then((res) => res.json())
-      .then((result) => {
-        setUsers(result);
-        console.log(users.l);
-      });
-  };
+  //   const UsersGet = () => {
+  //     fetch("http://rhome19.thddns.net:5526/api/materials/")
+  //       .then((res) => res.json())
+  //       .then((result) => {
+  //         setFactories(result);
+  //         console.log(materials);
+  //       });
+  //   };
 
   const UsersGetALL = async () => {
-    var data = await CRUDKUB("customers", "get", "", "");
-    // console.log(data);
-    setUsers(data);
+    var a = await CRUDKUB("factories", "get", "", "");
+    console.log(a);
+    setFactories(a);
   };
   // const UsersGetSig = (id) => {
   //   CRUDKUB("customers", "get", "", id);
   // };
 
   const UpdateUser = (id) => {
-    window.location = "/user/update/" + id;
+    window.location = "/factories/update/" + id;
   };
 
   const UserDelete = (id) => {
@@ -59,10 +59,10 @@ export default function UserList() {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://rhome19.thddns.net:5526/api/customers/delete/${id}`)
+          .delete(`http://rhome19.thddns.net:5526/api/factories/delete/${id}`)
           .then((res) => {
             // console.log(res);
-            window.location = "/user";
+            window.location = "/factories";
           });
         // Swal.fire("Deleted!", "Your file has been deleted.", "success");
       }
@@ -102,12 +102,12 @@ export default function UserList() {
                 color="primary"
                 gutterBottom
               >
-                Customers
+                All Factories
               </Typography>
             </Box>
             <Box style={{ marginLeft: "180" }}>
               <Link
-                to="/user/create"
+                to="/factories/create"
                 style={{ textDecoration: "none", padding: "40px" }}
               >
                 <Button
@@ -131,40 +131,50 @@ export default function UserList() {
                     Name
                   </TableCell>
                   <TableCell style={{ fontSize: "20px" }} align="right">
-                    Address
+                    Pit
                   </TableCell>
                   <TableCell style={{ fontSize: "20px" }} align="right">
-                    Contect
+                    Row
                   </TableCell>
                   <TableCell style={{ fontSize: "20px" }} align="right">
-                    E-mail
+                    Leg
                   </TableCell>
                   <TableCell style={{ fontSize: "20px" }} align="right">
-                    Line
+                    Type
                   </TableCell>
                   <TableCell style={{ fontSize: "20px" }} align="right">
+                    Time - Plant
+                  </TableCell>
+                  <TableCell style={{ fontSize: "20px" }} align="right">
+                    Finish - Plant
+                  </TableCell>
+                  <TableCell style={{ fontSize: "20px" }} align="center">
                     Action
                   </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {users.map((user) => (
-                  <TableRow key={user.ID}>
-                    <TableCell align="right">{user.id}</TableCell>
-                    <TableCell align="right">{user.name}</TableCell>
-                    <TableCell align="right">{user.address}</TableCell>
-                    <TableCell align="right">{user.contact}</TableCell>
-                    <TableCell align="right">{user.email}</TableCell>
-                    <TableCell align="right">{user.line}</TableCell>
+                {factories.map((factories) => (
+                  <TableRow key={factories.ID}>
+                    <TableCell align="right">{factories.id}</TableCell>
+                    <TableCell align="right">{factories.name}</TableCell>
+                    <TableCell align="right">{factories.pit}</TableCell>
+                    <TableCell align="right">{factories.row}</TableCell>
+                    <TableCell align="right">{factories.leg}</TableCell>
+                    <TableCell align="right">
+                      {factories.typepak.name}
+                    </TableCell>
+                    <TableCell align="right">{factories.timeplant}</TableCell>
+                    <TableCell align="right">{factories.finishplant}</TableCell>
                     <TableCell align="center">
                       <ButtonGroup
                         color="primary"
                         aria-label="outlined primary button group"
                       >
-                        <Button onClick={() => UpdateUser(user.id)}>
+                        <Button onClick={() => UpdateUser(factories.id)}>
                           Edit
                         </Button>
-                        <Button onClick={() => UserDelete(user.id)}>
+                        <Button onClick={() => UserDelete(factories.id)}>
                           Delete
                         </Button>
                       </ButtonGroup>

@@ -30,6 +30,7 @@ export default function UserList() {
       .then((res) => res.json())
       .then((result) => {
         setHr(result);
+        console.log(setHr);
       });
   };
 
@@ -39,9 +40,9 @@ export default function UserList() {
     setHr(a);
   };
 
-  const UsersGetSig = (id) => {
-    CRUDKUB("customers", "get", "", id);
-  };
+  // const UsersGetSig = (id) => {
+  //   CRUDKUB("customers", "get", "", id);
+  // };
 
   const UpdateUser = (id) => {
     window.location = "/hrs/update/" + id;
@@ -51,7 +52,7 @@ export default function UserList() {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
-      icon: "success",
+      icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
@@ -64,7 +65,7 @@ export default function UserList() {
             console.log(res);
             window.location = "/hrs";
           });
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        // Swal.fire("Deleted!", "Your file has been deleted.", "success");
       }
     });
 
@@ -140,9 +141,6 @@ export default function UserList() {
                     E-mail
                   </TableCell>
                   <TableCell style={{ fontSize: "20px" }} align="right">
-                    Education
-                  </TableCell>
-                  <TableCell style={{ fontSize: "20px" }} align="right">
                     Salary
                   </TableCell>
                   <TableCell style={{ fontSize: "20px" }} align="right">
@@ -161,7 +159,6 @@ export default function UserList() {
                     <TableCell align="right">{hr.address}</TableCell>
                     <TableCell align="right">{hr.contact}</TableCell>
                     <TableCell align="right">{hr.email}</TableCell>
-                    <TableCell align="right">{hr.education}</TableCell>
                     <TableCell align="right">{hr.salary}</TableCell>
                     <TableCell align="right">{hr.role.name}</TableCell>
                     <TableCell align="right">

@@ -18,33 +18,33 @@ import axios from "axios";
 import { CRUDKUB } from "../Api/CRUD";
 import Swal from "sweetalert2";
 
-export default function UserList() {
-  const [users, setUsers] = useState([]);
+export default function Material() {
+  const [materials, setMaterials] = useState([]);
 
   useEffect(() => {
     UsersGetALL();
   }, []);
 
   const UsersGet = () => {
-    fetch("http://rhome19.thddns.net:5526/api/customers/")
+    fetch("http://rhome19.thddns.net:5526/api/materials/")
       .then((res) => res.json())
       .then((result) => {
-        setUsers(result);
-        console.log(users.l);
+        setMaterials(result);
+        console.log(materials);
       });
   };
 
   const UsersGetALL = async () => {
-    var data = await CRUDKUB("customers", "get", "", "");
-    // console.log(data);
-    setUsers(data);
+    var a = await CRUDKUB("materials", "get", "", "");
+    console.log(a);
+    setMaterials(a);
   };
   // const UsersGetSig = (id) => {
   //   CRUDKUB("customers", "get", "", id);
   // };
 
   const UpdateUser = (id) => {
-    window.location = "/user/update/" + id;
+    window.location = "/material/update/" + id;
   };
 
   const UserDelete = (id) => {
@@ -59,10 +59,10 @@ export default function UserList() {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://rhome19.thddns.net:5526/api/customers/delete/${id}`)
+          .delete(`http://rhome19.thddns.net:5526/api/materials/delete/${id}`)
           .then((res) => {
             // console.log(res);
-            window.location = "/user";
+            window.location = "/material";
           });
         // Swal.fire("Deleted!", "Your file has been deleted.", "success");
       }
@@ -102,12 +102,12 @@ export default function UserList() {
                 color="primary"
                 gutterBottom
               >
-                Customers
+                All Materials
               </Typography>
             </Box>
             <Box style={{ marginLeft: "180" }}>
               <Link
-                to="/user/create"
+                to="/material/create"
                 style={{ textDecoration: "none", padding: "40px" }}
               >
                 <Button
@@ -131,40 +131,36 @@ export default function UserList() {
                     Name
                   </TableCell>
                   <TableCell style={{ fontSize: "20px" }} align="right">
-                    Address
+                    Type
                   </TableCell>
                   <TableCell style={{ fontSize: "20px" }} align="right">
-                    Contect
+                    Date
                   </TableCell>
                   <TableCell style={{ fontSize: "20px" }} align="right">
-                    E-mail
+                    Hr_id
                   </TableCell>
-                  <TableCell style={{ fontSize: "20px" }} align="right">
-                    Line
-                  </TableCell>
-                  <TableCell style={{ fontSize: "20px" }} align="right">
+                  <TableCell style={{ fontSize: "20px" }} align="center">
                     Action
                   </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {users.map((user) => (
-                  <TableRow key={user.ID}>
-                    <TableCell align="right">{user.id}</TableCell>
-                    <TableCell align="right">{user.name}</TableCell>
-                    <TableCell align="right">{user.address}</TableCell>
-                    <TableCell align="right">{user.contact}</TableCell>
-                    <TableCell align="right">{user.email}</TableCell>
-                    <TableCell align="right">{user.line}</TableCell>
+                {materials.map((materials) => (
+                  <TableRow key={materials.ID}>
+                    <TableCell align="right">{materials.id}</TableCell>
+                    <TableCell align="right">{materials.name}</TableCell>
+                    <TableCell align="right">{materials.type.name}</TableCell>
+                    <TableCell align="right">{materials.date}</TableCell>
+                    <TableCell align="right">{materials.hr.name}</TableCell>
                     <TableCell align="center">
                       <ButtonGroup
                         color="primary"
                         aria-label="outlined primary button group"
                       >
-                        <Button onClick={() => UpdateUser(user.id)}>
+                        <Button onClick={() => UpdateUser(materials.id)}>
                           Edit
                         </Button>
-                        <Button onClick={() => UserDelete(user.id)}>
+                        <Button onClick={() => UserDelete(materials.id)}>
                           Delete
                         </Button>
                       </ButtonGroup>

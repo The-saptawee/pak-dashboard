@@ -2,20 +2,20 @@ import React, { useState } from "react";
 import { Button, TextField, Grid, Typography, Container } from "@mui/material";
 import { CRUDKUB } from "../Api/CRUD";
 
-export default function UserCreate() {
+export default function CreateFactories() {
   const handleSubmit = (event) => {
     event.preventDefault();
     let data = {
       name: name,
-      password: password,
-      address: address,
-      contact: contact,
-      line: line,
-      email: email,
-      favorite: favorite,
+      pit: pit,
+      row: row,
+      leg: leg,
+      typepakId: type,
+      timeplant: timeplant,
+      finishplant: finishplant,
     };
 
-    CRUDKUB("customers", "create", data);
+    CRUDKUB("factories", "create", data);
     // fetch(`http://rhome19.thddns.net:5526/api/customers/create`, {
     //   method: "POST",
     //   headers: {
@@ -34,12 +34,12 @@ export default function UserCreate() {
   };
 
   const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [address, setAddress] = useState("");
-  const [contact, setContact] = useState("");
-  const [line, setLine] = useState("");
-  const [email, setEmail] = useState("");
-  const [favorite, setFavorite] = useState("");
+  const [pit, setPit] = useState("");
+  const [row, setRow] = useState("");
+  const [leg, setLeg] = useState("");
+  const [type, setType] = useState("");
+  const [timeplant, setTimeplant] = useState("");
+  const [finishplant, setFinishplant] = useState("");
 
   return (
     <Container maxWidth="xs" style={{ marginTop: "40px" }}>
@@ -51,7 +51,7 @@ export default function UserCreate() {
         }}
       >
         <Typography component="h1" variant="h5" style={{ fontSize: "32px" }}>
-          User
+          Factories
         </Typography>
         <form
           style={{
@@ -61,7 +61,7 @@ export default function UserCreate() {
           onSubmit={handleSubmit}
         >
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
                 autoComplete="name"
                 name="name"
@@ -69,20 +69,20 @@ export default function UserCreate() {
                 required
                 fullWidth
                 id="name"
-                label="You Name"
+                label="Name"
                 onChange={(e) => setName(e.target.value)}
                 autoFocus
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
-                type="password"
                 variant="outlined"
                 required
                 fullWidth
-                id="password"
-                label="Password"
-                onChange={(e) => setPassword(e.target.value)}
+                id="pit"
+                label="Pit Number Only"
+                type="number"
+                onChange={(e) => setPit(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -90,9 +90,10 @@ export default function UserCreate() {
                 variant="outlined"
                 required
                 fullWidth
-                id="adress"
-                label="Adress"
-                onChange={(e) => setAddress(e.target.value)}
+                id="row"
+                label="Row Number Only"
+                type="number"
+                onChange={(e) => setRow(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -100,9 +101,10 @@ export default function UserCreate() {
                 variant="outlined"
                 required
                 fullWidth
-                id="contact"
-                label="Contact"
-                onChange={(e) => setContact(e.target.value)}
+                id="leg"
+                label="Leg Number Only"
+                type="number"
+                onChange={(e) => setLeg(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -110,9 +112,9 @@ export default function UserCreate() {
                 variant="outlined"
                 required
                 fullWidth
-                id="line"
-                label="Line"
-                onChange={(e) => setLine(e.target.value)}
+                id="type"
+                label="Type"
+                onChange={(e) => setType(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -120,9 +122,13 @@ export default function UserCreate() {
                 variant="outlined"
                 required
                 fullWidth
-                id="email"
-                label="Email"
-                onChange={(e) => setEmail(e.target.value)}
+                id="timeplant"
+                label="Time - Plant"
+                type="date"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onChange={(e) => setTimeplant(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -130,9 +136,13 @@ export default function UserCreate() {
                 variant="outlined"
                 required
                 fullWidth
-                id="Favorite"
-                label="Favorite"
-                onChange={(e) => setFavorite(e.target.value)}
+                id="finishplant"
+                label="Finish - Plant"
+                type="date"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                onChange={(e) => setFinishplant(e.target.value)}
               />
             </Grid>
           </Grid>
